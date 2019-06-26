@@ -5,7 +5,7 @@
 
 function shadowsocksconfig(){
     SSLOCAL="[\"[::0]\",\"0.0.0.0\"]"
-    PORT="443"
+    PORT="8443"
     PASSWORD=""
     METHOD="xchacha20-ietf-poly1305"
     TIMEOUT="1800"
@@ -14,10 +14,10 @@ function shadowsocksconfig(){
     OBFSURI="/"
     FASTOPEN="true"
     REUSEPORT="true"
-    DNS1="8.8.8.8"
-    DNS2="8.8.4.4"
-    DNSv6a="2001:4860:4860::8888"
-    DNSv6b="2001:4860:4860::8844"
+    DNS1="1.1.1.1"
+    DNS2="1.0.0.1"
+    DNSv6a=""
+    DNSv6b=""
     DSCP="EF"
     MODE="tcp_and_udp"
     MTU=""
@@ -501,7 +501,7 @@ function sslibevinstall(){
     [ -z "$MAKECORES" ] && MAKECORES="1"
 	if [ "$1" = "install" ]; then
         [ -z "$libsodiumver" ] && libsodiumver="$(wget -qO- https://api.github.com/repos/jedisct1/libsodium/releases/latest | grep 'tag_name' | cut -d\" -f4)"
-        wget -t 3 -T 30 -nv -O libsodium-${libsodiumver}.tar.gz https://codeload.github.com/jedisct1/libsodium/tar.gz/${libsodiumver}/libsodium-${libsodiumver}
+        wget -t 3 -T 30 -nv -O libsodium-${libsodiumver}.tar.gz https://codeload.github.com/jedisct1/libsodium/tar.gz/${libsodiumver}
         [ "$?" != "0" ] && sslibevinstallerr "libsodium-${libsodiumver}"
         [ -d libsodium-${libsodiumver} ] && rm -rf libsodium-${libsodiumver}
         tar zxf libsodium-${libsodiumver}.tar.gz

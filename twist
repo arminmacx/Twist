@@ -542,8 +542,7 @@ function sslibevinstall(){
     tar zxf ${ssobfsver}.tar.gz
     pushd $ssobfsver
     [ -d libcork ] && rm -rf libcork
-    git clone https://github.com/shadowsocks/libcork.git -b simple-obfs
-    [ "$?" != "0" ] && sslibevinstallerr "libcork"
+    git submodule update --init --recursive
     ./autogen.sh
     ./configure
     make "-j$((MAKECORES+1))" && make ${1} || sslibevinstallerr "simple-obfs-$(echo ${ssobfstag} | sed -e 's/^[a-zA-Z]//g')" err

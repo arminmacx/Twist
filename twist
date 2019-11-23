@@ -541,7 +541,6 @@ function sslibevinstall(){
     [ -d ${ssobfsver} ] && rm -rf $ssobfsver
     tar zxf ${ssobfsver}.tar.gz
     pushd $ssobfsver
-    [ -d libcork ] && rm -rf libcork
     git submodule update --init --recursive
     ./autogen.sh
     ./configure

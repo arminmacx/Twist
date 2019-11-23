@@ -536,13 +536,13 @@ function sslibevinstall(){
     ldconfig
     [ -z "$ssobfstag" ] && ssobfstag="$(wget -qO- https://api.github.com/repos/shadowsocks/simple-obfs/releases/latest | grep 'tag_name' | cut -d\" -f4)"
     ssobfsver="simple-obfs-$(echo ${ssobfstag} | sed -e 's/^[a-zA-Z]//g')"
-    wget -t 3 -T 30 -nv -O ${ssobfsver}.tar.gz https://github.com/shadowsocks/simple-obfs/archive/${ssobfstag}.tar.gz
+    wget -t 3 -T 30 -nv -O ${ssobfsver}.tar.gz https://github.com/shadowsocks/simple-obfs/releases/archive/v0.0.5/${ssobfstag}.tar.gz
     [ "$?" != "0" ] && sslibevinstallerr "simple-obfs-$(echo ${ssobfstag} | sed -e 's/^[a-zA-Z]//g')"
     [ -d ${ssobfsver} ] && rm -rf $ssobfsver
     tar zxf ${ssobfsver}.tar.gz
     pushd $ssobfsver
     [ -d libcork ] && rm -rf libcork
-    git submodule update --init --recursive
+    git clone https://github.com/shadowsocks/libcork.git -b simple-obfs
     [ "$?" != "0" ] && sslibevinstallerr "libcork"
     ./autogen.sh
     ./configure
